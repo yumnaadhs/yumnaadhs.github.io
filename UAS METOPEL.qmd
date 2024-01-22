@@ -1,0 +1,133 @@
+---
+title: "Pengaruh Unmet Need terhadap Angka Harapan Hidup Di Yogyakarta Tahun 2019-2021"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Yumna Adhi Sajida"
+date: 2024-01-9
+number-sections: true
+format:
+  html: default
+  docx: default
+---
+![logo APP](poltekapp.jpg)
+
+## Pendahuluan
+
+### Latar belakang
+
+Hingga saat ini Unmet need masih menjadi permasalahan program Kependudukan dan Keluarga Berencana di beberapa  daerah  di  Indonesia. Tidak meratanya persebaran fasilitas KB diseluruh Indonesia menyebabkan Rumah Tangga yang tidak menginginkan kelahiran terpaksa harus menerima hal tersebut. Oleh karena itu, hal tersebut dapat menyebabkan kelahiran yang tidak diinginkan dan ditakutkan akan memiliki dampak pada Angka Harapan Hidup bagi bayi dan anak. 
+
+### Ruang lingkup
+
+Ruang lingkup pembahasan masalah sesuai dengan variable yang akan digunakan pada analisis kali ini. Yaitu Jumlah Unmet Need, Angka Harapan Hidup pada tahun 2019-2021. Batasan masalah ini berperan membantu dalam mengidentifikasi masalah yang akan dibahas dan membatasi jangkauan proses yang dibahas.
+
+### Rumusan masalah
+
+Apakah Unmet Need berpengaruh terhdap Angka Harapan di Indonesia pada tahun 2019-2021 ?
+
+### Tujuan dan manfaat penelitian
+
+Tujuan penelitian ini untuk mengetahui pengaruh Unmet Need pada tahun 2019-2021 dengan Angka Harapan Hidup pada tahun 2019-2021 .
+
+Manfaat penelitian ini agar masyarakat dapat mengetahui pengaruh Unmet Need pada Angka Harapan Hidup pada tahun 2019-2021 .
+
+### Package
+
+```{r}
+#| warning: false
+#| echo: true
+library(tidyverse)
+library(readxl)
+library(WDI) # tambahkan library lain jika diperlukan
+```
+
+```{r}
+#|warning : false
+#|echo : true
+library("readxl")
+library("dplyr")
+library("ggplot2")
+```
+
+## Studi pustaka
+
+Unmet Need adalah persentase perempuan menikah yang tidak ingin mempunyai anak lagi atau ingin menunda kelahiran berikutnya namun tidak menggunakan alat kontrasepsi. Unmet need juga dapat diartikan sebagai kelompok yang tidak ingin mempunyai anak lagi atau ingin menunda kehamilan hingga 2 tahun namun tidak menggunakan alat kontrasepsi untuk mencegah kehamilan.
+
+## Metode penelitian
+
+### Data
+
+| Tahun| AHH  | Unmet Need |
+|------|------|------------|
+| 2019 |149.89| 4.61       |
+| 2020 |150.05| 3.9        |
+| 2021 |150.10| 3.02       |
+
+Penelitian ini menggunakan data menggunakan data sekunder dengan bentuk data time series 2019-2021. Data yang digunakan adalah data yang telah diolah oleh Badan Pusat Statistik Yogyakarta.
+
+membaca data
+
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel("DATA BPS.xlsx")
+head(dat)
+```
+
+# A tibble: 3 × 3
+  TAHUN     X     Y
+  <dbl> <dbl> <dbl>
+1  2019  150.  4.61
+2  2020  150.  3.9 
+3  2021  150.  3.02
+
+membaca data
+
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel('DATA BPS.xlsx')
+head(dat)
+ggplot(data=dat,aes(x=X,y=Y)) +
+  geom_point ()
+```
+### Metode analisis
+
+Metode yang dipilih adalah regresi univariat atau Ordinary Least Square (OLS) dengan 1 variabel independen. Penelitian ini merbaksud mencari hubungan antara hwy dan cty. Spesifikasi yang dilakukan adalah:
+
+$$
+y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah Unmet Need dan $x_t$ adalah AHH.
+
+## Pembahasan
+
+### Pembahasan masalah
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel('DATA BPS.xlsx')
+head(dat)
+```
+
+Pada bagian ini dapat ditampilkan data dan visualisasi data yang telah dikumpulkan.
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+reg1<-lm(X~Y,data=dat)
+summary(reg1)
+```
+
+## Kesimpulan
+
+Dari hasil yang diperoleh dapat dikatakan bahwa model regresi yang dihasilkan tidak menunjukkan adanya pengaruh yang signifikan antara Unmet Need dan Angka Harapan di Indonesia pada tahun 2019-2021. Hal ini didukung oleh nilai p yang tinggi untuk koefisien Y, serta F-statistic yang tidak signifikan.
+
+## Referensi
+
+Rahayu, A., Suharsih, S., & Julianto, E. A. (2022). Determinants of unmet need for family planning in Sleman District, Yogyakarta Province, Indonesia. Economics and Business Quarterly Reviews, 5(3).
+
+Sarlis, N. (2019). Faktor yang Berhubungan dengan Unmet Need Pada Ibu Non Akseptor Tahun 2018. Jurnal Endurance, 4(2), 272-281.
+
+Sulistiawan, D., Gustina, E., Matahari, R., & Marthasari, V. (2020). Profil Sosiodemografis Unmet Need Keluarga Berencana pada Wanita Kawin di Daerah Istimewa Yogyakarta. Jurnal Keluarga Berencana, 5(2), 1-9.
+
